@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/pay"
+  },
+  "response": {
+    "status": 200,
+    "body": "TX-{{randomValue length=12 type='ALPHANUMERIC'}}",
+    "transformers": ["response-template"],
+    "fixedDelayMilliseconds": 500
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/fraud"
+  },
+  "response": {
+    "status": 200,
+    "body": "false",
+    "fixedDelayMilliseconds": 300
+  }
+}
