@@ -1,8 +1,10 @@
 package br.com.will.classes.virtualthread.domain;
 
+import java.math.BigDecimal;
+
 public record Payment(
         String orderId,
-        double amount,
+        BigDecimal amount,
         PaymentStatus status,
         String transactionId
 ) {

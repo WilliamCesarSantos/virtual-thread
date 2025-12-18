@@ -4,10 +4,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "payment-gateway", url = "http://wiremock:8080")
+@FeignClient(name = "payment-gateway", url = "${payment.service.url}")
 interface PaymentFeignClient {
 
-    @PostMapping("/pay")
+    @PostMapping("/api/v1/pay")
     String pay(
             @RequestBody PaymentRequest request
     );

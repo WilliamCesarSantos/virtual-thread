@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("/api/v1/payments")
 public class PaymentController {
 
     private final ProcessPaymentUseCase useCase;
@@ -22,7 +24,7 @@ public class PaymentController {
     @PostMapping
     public Payment pay(
             @RequestParam @NotBlank String orderId,
-            @RequestParam @Positive double amount
+            @RequestParam @Positive BigDecimal amount
     ) {
         return useCase.execute(orderId, amount);
     }

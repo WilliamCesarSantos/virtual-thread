@@ -1,10 +1,13 @@
 {
   "request": {
     "method": "POST",
-    "url": "/pay"
+    "url": "/api/v1/pay"
   },
   "response": {
     "status": 200,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
     "body": "TX-{{randomValue length=12 type='ALPHANUMERIC'}}",
     "transformers": ["response-template"],
     "fixedDelayMilliseconds": 500

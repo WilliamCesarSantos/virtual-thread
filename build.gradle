@@ -1,36 +1,61 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.0'
-    id 'io.spring.dependency-management' version '1.1.5'
-    id 'io.gatling.gradle' version '3.10.5'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'io.gatling.gradle' version '3.14.9'
+    id 'scala'
 }
 
 group = 'br.com.will.classes'
 version = '1.0.0'
 
 java {
-    toolchain { languageVersion = JavaLanguageVersion.of(25) }
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
-repositories { mavenCentral() }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'software.amazon.awssdk:dynamodb:2.25.0'
-    implementation 'software.amazon.awssdk:dynamodb-enhanced:2.25.0'
 
-    gatlingImplementation 'io.gatling:gatling-core'
-    gatlingImplementation 'io.gatling:gatling-http'
-    gatlingImplementation 'io.gatling:gatling-jsonpath'
+    gatlingImplementation 'org.scala-lang:scala-library:2.13.10'
+    gatlingImplementation 'io.gatling:gatling-core:3.11.5'
+    gatlingImplementation 'io.gatling:gatling-http:3.11.5'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+gatling {
+    toolVersion = '3.11.5'
+
+    simulationsDir = file('src/gatling/scala')
+    resourcesDir = file('src/gatling/resources')
+
+    // simulations = ['com.example.simulation.BasicSimulation']
+}
+
+sourceSets {
+    gatling {
+        scala {
+            srcDirs = ['src/gatling/scala']
+        }
+        resources {
+            srcDirs = ['src/gatling/resources']
+        }
+    }
+}
+
+
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.6"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.0"
     }
 }
 

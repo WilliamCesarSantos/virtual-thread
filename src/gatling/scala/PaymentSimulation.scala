@@ -11,7 +11,7 @@ class PaymentSimulation extends Simulation {
   val scn = scenario("Payment load test")
     .exec(
       http("Process payment")
-        .post("/payments")
+        .post("/api/v1/payments")
         .queryParam("orderId", "ORD-${randomInt(1000000)}")
         .queryParam("amount", "100")
         .check(status.is(200))

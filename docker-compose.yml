@@ -23,10 +23,11 @@ services:
     image: wiremock/wiremock:latest
     container_name: wiremock_dynamodb_virtual_thread
     ports:
-      - "8080:8080"
+      - "8282:8080"
       - "8443:8443"
     volumes:
       - "./wiremock/mappings:/home/wiremock/mappings"
+    command: ["--verbose", "--global-response-templating"]
     networks:
       - localstack_net
 

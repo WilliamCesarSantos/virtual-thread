@@ -4,13 +4,15 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "fraud-service", url = "http://wiremock:8080")
+import java.math.BigDecimal;
+
+@FeignClient(name = "fraud-service", url = "${fraud.service.url}")
 interface FraudFeignClient {
 
-    @PostMapping("/fraud-analysis")
-    Boolean check(
+    @PostMapping("/api/v1/fraud-analysis")
+    String check(
             @RequestParam String orderId,
-            @RequestParam double amount
+            @RequestParam BigDecimal amount
     );
 
 }

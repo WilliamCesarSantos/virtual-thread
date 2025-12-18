@@ -1,10 +1,13 @@
 {
   "request": {
     "method": "POST",
-    "urlPath": "/fraud"
+    "urlPath": "/api/v1/fraud-analysis"
   },
   "response": {
     "status": 200,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
     "body": "false",
     "fixedDelayMilliseconds": 300
   }

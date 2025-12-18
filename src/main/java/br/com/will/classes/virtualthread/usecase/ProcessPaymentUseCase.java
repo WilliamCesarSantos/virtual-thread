@@ -7,6 +7,8 @@ import br.com.will.classes.virtualthread.port.PaymentGateway;
 import br.com.will.classes.virtualthread.port.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class ProcessPaymentUseCase {
 
@@ -22,7 +24,7 @@ public class ProcessPaymentUseCase {
         this.fraudChecker = fraudChecker;
     }
 
-    public Payment execute(String orderId, double amount) {
+    public Payment execute(String orderId, BigDecimal amount) {
         if (repository.existsByOrderId(orderId)) {
             throw new IllegalStateException("Payment already processed");
         }
