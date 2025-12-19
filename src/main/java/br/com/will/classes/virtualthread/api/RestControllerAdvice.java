@@ -16,11 +16,11 @@ public class RestControllerAdvice {
     public ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
         logger.error("IllegalStateException", e);
         return ResponseEntity
-                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .status(HttpStatus.UNPROCESSABLE_CONTENT)
                 .header("content-type", "application/json")
                 .body(String.format("""
                         {
-                            "error": "Unprocessable Entity",
+                            "error": "Unprocessable Content",
                             "message": "%s"
                         }""", e.getMessage()));
     }

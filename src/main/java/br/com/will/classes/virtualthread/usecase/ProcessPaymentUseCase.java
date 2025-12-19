@@ -8,6 +8,7 @@ import br.com.will.classes.virtualthread.port.PaymentRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 public class ProcessPaymentUseCase {
@@ -30,14 +31,26 @@ public class ProcessPaymentUseCase {
         }
 
         if (fraudChecker.isFraud(orderId, amount)) {
-            Payment fraud = new Payment(orderId, amount, PaymentStatus.FRAUD, null);
+            Payment fraud = new Payment(
+                    orderId,
+                    amount,
+                    PaymentStatus.FRAUD,
+                    null,
+                    LocalDateTime.now()
+            );
             repository.save(fraud);
             return fraud;
         }
 
         String transactionId = gateway.charge(orderId, amount);
 
-        Payment payment = new Payment(orderId, amount, PaymentStatus.APPROVED, transactionId);
+        Payment payment = new Payment(
+                orderId,
+                amount,
+                PaymentStatus.APPROVED,
+                transactionId,
+                LocalDateTime.now()
+        );
         repository.save(payment);
         return payment;
     }
