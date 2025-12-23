@@ -63,6 +63,12 @@ The API will be available at:
 POST http://localhost:8080/api/v1/payments
 ```
 
+Another option, using docker:
+```bash
+docker build -t virtual-threads .
+docker run -p 8080:8080 virtual-threads
+```
+
 Example request:
 
 ```bash
